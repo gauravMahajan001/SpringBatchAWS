@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: SpringbatchFile
+  batch:
+    job:
+      enabled: false
+  datasource:
+    url: jdbc:db2://localhost:50000/testdb
+    username: db2user
+    password: password
+    driver-class-name: com.ibm.db2.jcc.DB2Driver
+
+chunk:
+  size: 1000
+retry:
+  count: 3
+
+resilience4j:
+  retry:
+    instances:
+      mainframeRetry:
+        max-attempts: 3
+        wait-duration: 2s
+
+  circuitbreaker:
+    instances:
+      mainframeCircuitBreaker:
+        sliding-window-size: 5
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 30s
+
+record:
+  size: 500
