@@ -16,8 +16,4 @@ public class S3Service {
 	public String presignUploadUrl(String fileName, Duration duration) {
 		return s3Port.presignUploadUrl(fileName, duration);
 	}
-
-	public String presignDownloadUrl(String fileName, Duration duration) {
-		return s3Port.presignDownloadUrl(fileName, duration);
-	}
 }
