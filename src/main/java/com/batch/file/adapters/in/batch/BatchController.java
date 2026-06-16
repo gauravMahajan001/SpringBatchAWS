@@ -1,4 +1,4 @@
-package com.batch.file.adapters.batch.in;
+package com.batch.file.adapters.in.batch;
 
 import com.batch.file.dto.BatchDto;
 import com.batch.file.ports.batch.in.CustomerBatchPort;

@@ -1,6 +1,6 @@
 package com.batch.file.infrastructure.batch;
 
-import com.batch.file.adapters.batch.in.CustomerBatchWriter;
+import com.batch.file.adapters.in.batch.CustomerBatchWriter;
 import com.batch.file.constant.ApplicationConstant;
 import com.batch.file.entity.Customer;
 import org.springframework.batch.core.Step;

@@ -1,4 +1,4 @@
-package com.batch.file.adapters.batch.out;
+package com.batch.file.adapters.out.batch;
 
 import com.batch.file.domain.rule.CustomerValidation;
 import com.batch.file.entity.Customer;
