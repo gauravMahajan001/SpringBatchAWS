@@ -3,7 +3,7 @@ package com.batch.file.application.service.batch;
 import com.batch.file.entity.batch.Customer;
 import com.batch.file.exception.MainFrameException;
 import com.batch.file.ports.out.batch.FailedRecordPort;
-import com.batch.file.ports.out.batch.MainFramePort;
+import com.batch.file.ports.out.batch.MainframePort;
 import io.github.resilience4j.circuitbreaker.CircuitBreaker;
 import io.github.resilience4j.circuitbreaker.CircuitBreakerRegistry;
 import io.github.resilience4j.retry.annotation.Retry;
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 public class MainframeService {
 
     private final CircuitBreakerRegistry circuitBreakerRegistry;
-    private final MainFramePort mainFramePort;
+    private final MainframePort mainFramePort;
     private final FailedRecordPort failedRecordPort;
 
     @Retry(name = "mainFrameRetry")

@@ -2,7 +2,7 @@ package com.batch.file.adapters.out.batch;
 
 import com.batch.file.domain.rule.CustomerValidation;
 import com.batch.file.entity.batch.Customer;
-import com.batch.file.ports.out.batch.MainFramePort;
+import com.batch.file.ports.out.batch.MainframePort;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.item.Chunk;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class MainFrameAdapter implements MainFramePort {
+public class MainframeAdapter implements MainframePort {
   private final JdbcBatchItemWriter<Customer> jdbcBatchItemWriter;
   private final CustomerValidation customerValidation;
 
