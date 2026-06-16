@@ -1,7 +1,7 @@
 package com.batch.file.adapters.in.batch;
 
 import com.batch.file.dto.BatchDto;
-import com.batch.file.ports.batch.in.CustomerBatchPort;
+import com.batch.file.ports.in.batch.CustomerBatchPort;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.JobParametersInvalidException;

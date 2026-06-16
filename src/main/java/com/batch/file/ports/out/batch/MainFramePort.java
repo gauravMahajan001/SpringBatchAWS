@@ -1,4 +1,4 @@
-package com.batch.file.ports.batch.out;
+package com.batch.file.ports.out.batch;
 
 import com.batch.file.entity.Customer;
 import org.springframework.batch.item.Chunk;

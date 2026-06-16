@@ -2,7 +2,7 @@ package com.batch.file.adapters.out.batch;
 
 import com.batch.file.domain.rule.CustomerValidation;
 import com.batch.file.entity.Customer;
-import com.batch.file.ports.batch.out.MainFramePort;
+import com.batch.file.ports.out.batch.MainFramePort;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.item.Chunk;

@@ -3,7 +3,7 @@ package com.batch.file.adapters.out.batch;
 import com.batch.file.constant.ApplicationConstant;
 import com.batch.file.entity.Customer;
 import com.batch.file.entity.FailedRecord;
-import com.batch.file.ports.batch.out.FailedRecordPort;
+import com.batch.file.ports.out.batch.FailedRecordPort;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.item.Chunk;

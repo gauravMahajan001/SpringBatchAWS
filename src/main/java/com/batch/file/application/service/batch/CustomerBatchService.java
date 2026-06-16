@@ -1,7 +1,7 @@
 package com.batch.file.application.service.batch;
 
 import com.batch.file.constant.ApplicationConstant;
-import com.batch.file.ports.batch.in.CustomerBatchPort;
+import com.batch.file.ports.in.batch.CustomerBatchPort;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;

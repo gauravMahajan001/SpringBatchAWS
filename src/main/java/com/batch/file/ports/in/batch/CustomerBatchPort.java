@@ -1,4 +1,4 @@
-package com.batch.file.ports.batch.in;
+package com.batch.file.ports.in.batch;
 
 import org.springframework.batch.core.JobParametersInvalidException;
 import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException;

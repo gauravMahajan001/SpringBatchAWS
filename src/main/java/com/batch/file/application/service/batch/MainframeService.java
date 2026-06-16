@@ -2,8 +2,8 @@ package com.batch.file.application.service.batch;
 
 import com.batch.file.entity.Customer;
 import com.batch.file.exception.MainFrameException;
-import com.batch.file.ports.batch.out.FailedRecordPort;
-import com.batch.file.ports.batch.out.MainFramePort;
+import com.batch.file.ports.out.batch.FailedRecordPort;
+import com.batch.file.ports.out.batch.MainFramePort;
 import io.github.resilience4j.circuitbreaker.CircuitBreaker;
 import io.github.resilience4j.circuitbreaker.CircuitBreakerRegistry;
 import io.github.resilience4j.retry.annotation.Retry;
