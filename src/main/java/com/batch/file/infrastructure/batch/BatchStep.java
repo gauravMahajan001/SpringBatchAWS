@@ -3,6 +3,7 @@ package com.batch.file.infrastructure.batch;
 import com.batch.file.adapters.in.batch.BatchWriter;
 import com.batch.file.constant.ApplicationConstant;
 import com.batch.file.entity.batch.Customer;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
@@ -17,8 +18,14 @@ import software.amazon.awssdk.services.dynamodb.model.ProvisionedThroughputExcee
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 
+@Slf4j
 @Configuration
-public class StepConfig {
+/*
+ * BatchStep class is responsible for configuring the batch processing step in a Spring Batch job.
+ * It defines the chunk size and retry count for processing Customer entities.
+ * The step reads Customer data, processes it, and writes it to the specified output.
+ */
+public class BatchStep {
     @Value("${chunk.size}")
     private int chuckSize;
     @Value("${retry.count}")
@@ -32,6 +39,7 @@ public class StepConfig {
             ItemProcessor<Customer, Customer> processor,
             BatchWriter writer) {
 
+        log.info("Initializing batch step with configuration - chunkSize: {}, retryCount: {}", chuckSize, retryCount);
         return new StepBuilder(
                 ApplicationConstant.CUSTOMER_STEP, jobRepository)
                 .<Customer, Customer>chunk(chuckSize, transactionManager)

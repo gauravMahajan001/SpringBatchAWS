@@ -2,6 +2,7 @@ package com.batch.file.adapters.out.storage;
 
 import com.batch.file.ports.out.storage.S3Port;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import software.amazon.awssdk.services.s3.model.GetObjectRequest;
@@ -14,6 +15,7 @@ import software.amazon.awssdk.services.s3.presigner.model.PutObjectPresignReques
 
 import java.time.Duration;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class S3PresignerAdapter implements S3Port {
@@ -25,6 +27,7 @@ public class S3PresignerAdapter implements S3Port {
 
     @Override
     public String presignUploadUrl(String fileName, Duration duration) {
+        log.debug("Generating presign upload URL for fileName: {}, bucket: {}, duration: {}", fileName, bucketName, duration);
         PutObjectRequest putObjectRequest = PutObjectRequest.builder()
                 .bucket(bucketName)
                 .key(fileName)
@@ -36,6 +39,25 @@ public class S3PresignerAdapter implements S3Port {
                 .build();
 
         PresignedPutObjectRequest presignedRequest = s3Presigner.presignPutObject(presignRequest);
+        log.info("Successfully generated presign upload URL for fileName: {} in bucket: {}", fileName, bucketName);
+        return presignedRequest.url().toString();
+    }
+
+    @Override
+    public String presignDownloadUrl(String fileName, Duration duration) {
+        log.debug("Generating presign download URL for fileName: {}, bucket: {}, duration: {}", fileName, bucketName, duration);
+        GetObjectRequest getObjectRequest = GetObjectRequest.builder()
+                .bucket(bucketName)
+                .key(fileName)
+                .build();
+
+        GetObjectPresignRequest presignRequest = GetObjectPresignRequest.builder()
+                .signatureDuration(duration)
+                .getObjectRequest(getObjectRequest)
+                .build();
+
+        PresignedGetObjectRequest presignedRequest = s3Presigner.presignGetObject(presignRequest);
+        log.info("Successfully generated presign download URL for fileName: {} in bucket: {}", fileName, bucketName);
         return presignedRequest.url().toString();
     }
 }

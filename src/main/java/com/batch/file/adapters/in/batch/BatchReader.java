@@ -1,6 +1,7 @@
 package com.batch.file.adapters.in.batch;
 
 import com.batch.file.entity.batch.Customer;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.LineMapper;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
@@ -16,23 +17,27 @@ import org.springframework.core.io.FileSystemResource;
  *  Name'. The reader is configured to skip the first line (header) and uses a LineMapper
  *  to map each line of the CSV to a Customer object.
  */
+@Slf4j
 @Configuration
 public class BatchReader {
     @Bean
     public FlatFileItemReader<Customer> customerReader(@Value("#{jobParameters['fileName']}") String fileName) {
 
+        log.info("Initializing FlatFileItemReader for file: {}", fileName);
         FlatFileItemReader<Customer> reader = new FlatFileItemReader<>();
         reader.setResource(new FileSystemResource(fileName));
         reader.setLinesToSkip(1);
         reader.setName("customerReader");
         reader.setLineMapper(lineMapper());
 
+        log.debug("FlatFileItemReader configured for file: {}", fileName);
         return reader;
     }
 
     @Bean
     public LineMapper<Customer> lineMapper() {
 
+        log.trace("Creating LineMapper for Customer objects");
         DefaultLineMapper<Customer> lineMapper = new DefaultLineMapper<>();
         DelimitedLineTokenizer tokenizer = new DelimitedLineTokenizer();
         tokenizer.setDelimiter(",");
