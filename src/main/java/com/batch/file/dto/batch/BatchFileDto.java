@@ -1,9 +1,9 @@
-package com.batch.file.dto;
+package com.batch.file.dto.batch;
 
 import lombok.Data;
 
 @Data
-public class BatchDto {
+public class BatchFileDto {
     private String bucketName;
     private String fileName;
 

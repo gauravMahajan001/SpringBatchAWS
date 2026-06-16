@@ -1,6 +1,6 @@
 package com.batch.file.application.service.batch;
 
-import com.batch.file.entity.Customer;
+import com.batch.file.entity.batch.Customer;
 import com.batch.file.exception.MainFrameException;
 import com.batch.file.ports.out.batch.FailedRecordPort;
 import com.batch.file.ports.out.batch.MainFramePort;

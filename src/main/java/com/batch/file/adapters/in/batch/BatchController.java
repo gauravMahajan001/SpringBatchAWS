@@ -1,6 +1,6 @@
 package com.batch.file.adapters.in.batch;
 
-import com.batch.file.dto.BatchDto;
+import com.batch.file.dto.batch.BatchFileDto;
 import com.batch.file.ports.in.batch.BatchPort;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +22,7 @@ public class BatchController {
 private final BatchPort customerBatchPort;
 
     @PostMapping("/startBatch")
-    public String processFile(@RequestBody BatchDto batchFileDto) throws JobInstanceAlreadyCompleteException,
+    public String processFile(@RequestBody BatchFileDto batchFileDto) throws JobInstanceAlreadyCompleteException,
             JobExecutionAlreadyRunningException, JobParametersInvalidException, JobRestartException {
 
        return customerBatchPort.start(batchFileDto.getBucketName(), batchFileDto.getFileName());

@@ -1,4 +1,4 @@
-package com.batch.file.infrastructure.api;
+package com.batch.file.infrastructure.storage;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

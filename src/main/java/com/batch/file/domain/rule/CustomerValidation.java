@@ -1,6 +1,6 @@
 package com.batch.file.domain.rule;
 
-import com.batch.file.entity.Customer;
+import com.batch.file.entity.batch.Customer;
 import org.springframework.stereotype.Component;
 
 @Component

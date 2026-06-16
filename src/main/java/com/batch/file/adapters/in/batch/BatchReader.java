@@ -1,6 +1,6 @@
 package com.batch.file.adapters.in.batch;
 
-import com.batch.file.entity.Customer;
+import com.batch.file.entity.batch.Customer;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.LineMapper;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;

@@ -1,5 +1,5 @@
 
-package com.batch.file.domain.service;
+package com.batch.file.application.service.storage;
 
 import com.batch.file.ports.out.storage.S3Port;
 import lombok.RequiredArgsConstructor;

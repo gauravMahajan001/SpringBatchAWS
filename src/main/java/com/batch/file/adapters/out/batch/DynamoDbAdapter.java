@@ -2,7 +2,7 @@ package com.batch.file.adapters.out.batch;
 
 import com.batch.file.constant.ApplicationConstant;
 import com.batch.file.domain.rule.CustomerValidation;
-import com.batch.file.entity.Customer;
+import com.batch.file.entity.batch.Customer;
 import com.batch.file.ports.out.batch.DynamoDbPort;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

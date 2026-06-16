@@ -1,6 +1,6 @@
 package com.batch.file.adapters.in.storage;
 
-import com.batch.file.domain.service.S3Service;
+import com.batch.file.application.service.storage.S3Service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

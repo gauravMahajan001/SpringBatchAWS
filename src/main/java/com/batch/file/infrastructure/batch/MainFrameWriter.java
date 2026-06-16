@@ -1,6 +1,6 @@
 package com.batch.file.infrastructure.batch;
 
-import com.batch.file.entity.Customer;
+import com.batch.file.entity.batch.Customer;
 import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider;
 import org.springframework.batch.item.database.JdbcBatchItemWriter;
 import org.springframework.context.annotation.Bean;
