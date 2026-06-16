@@ -13,12 +13,12 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class BatchWriter implements ItemWriter<Customer> {
 
-    private final BatchProcessingService customerProcessingService;
+    private final BatchProcessingService batchProcessingService;
 
     @Override
     public void write(Chunk<? extends Customer> chunk) {
 
-        customerProcessingService.process(chunk);
+        batchProcessingService.process(chunk);
     }
 }
 
