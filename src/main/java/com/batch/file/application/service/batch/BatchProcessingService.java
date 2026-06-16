@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class CustomerProcessingService {
+public class BatchProcessingService {
 
     private final DynamoDbPort dynamoDbPort;
     private final MainframeService mainframeService;
@@ -32,9 +32,9 @@ public class CustomerProcessingService {
         }
 
         //NORMAL FLOW. if there is any exception then  retry and circuit breaker  mechanism
-        log.info("write on mainfame started");
+        log.info("write on mainframe started");
         mainframeService.send(chunk);
-        log.info("write on mainfame completed");
+        log.info("write on mainframe completed");
     }
 
 }

@@ -1,6 +1,6 @@
 package com.batch.file.infrastructure.batch;
 
-import com.batch.file.adapters.in.batch.CustomerBatchWriter;
+import com.batch.file.adapters.in.batch.BatchWriter;
 import com.batch.file.constant.ApplicationConstant;
 import com.batch.file.entity.Customer;
 import org.springframework.batch.core.Step;
@@ -30,7 +30,7 @@ public class StepConfig {
             PlatformTransactionManager transactionManager,
             ItemReader<Customer> reader,
             ItemProcessor<Customer, Customer> processor,
-            CustomerBatchWriter writer) {
+            BatchWriter writer) {
 
         return new StepBuilder(
                 ApplicationConstant.CUSTOMER_STEP, jobRepository)

@@ -1,7 +1,7 @@
 package com.batch.file.adapters.in.batch;
 
 import com.batch.file.dto.BatchDto;
-import com.batch.file.ports.in.batch.CustomerBatchPort;
+import com.batch.file.ports.in.batch.BatchPort;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.JobParametersInvalidException;
@@ -19,12 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class BatchController {
 
-private final CustomerBatchPort customerBatch;
+private final BatchPort customerBatchPort;
 
     @PostMapping("/startBatch")
     public String processFile(@RequestBody BatchDto batchFileDto) throws JobInstanceAlreadyCompleteException,
             JobExecutionAlreadyRunningException, JobParametersInvalidException, JobRestartException {
 
-       return customerBatch.start(batchFileDto.getBucketName(), batchFileDto.getFileName());
+       return customerBatchPort.start(batchFileDto.getBucketName(), batchFileDto.getFileName());
     }
 }

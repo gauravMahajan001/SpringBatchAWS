@@ -18,7 +18,7 @@ public class MainFrameAdapter implements MainFramePort {
 
     @Override
     public void send(Chunk<? extends Customer> chunk) throws Exception {
-        log.info("write chuck on mainFrame started");
+        log.info("Write chunk to mainframe started");
         Chunk<Customer> validChunk = new Chunk<>();
         for (Customer customer : chunk) {
 
@@ -34,6 +34,6 @@ public class MainFrameAdapter implements MainFramePort {
         if (!validChunk.isEmpty()) {
             jdbcBatchItemWriter.write(validChunk);
         }
-        log.info("write chuck on dynamodb completed");
+        log.info("Write chunk to mainframe completed");
     }
 }

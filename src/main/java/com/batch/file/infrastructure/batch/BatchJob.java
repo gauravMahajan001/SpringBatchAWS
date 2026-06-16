@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @RequiredArgsConstructor
-public class CustomerJob {
+public class BatchJob {
 
     private final JobRepository jobRepository;
     private final Step stepConfig;

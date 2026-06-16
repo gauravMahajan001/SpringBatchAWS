@@ -11,9 +11,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.FileSystemResource;
 
-
+/* This class is responsible for reading customer data from a CSV file and mapping it to Customer objects.
+ *  It defines a FlatFileItemReader bean that reads the CSV file specified by the job parameter 'file
+ *  Name'. The reader is configured to skip the first line (header) and uses a LineMapper
+ *  to map each line of the CSV to a Customer object.
+ */
 @Configuration
-public class CustomerCsvReader {
+public class BatchReader {
     @Bean
     public FlatFileItemReader<Customer> customerReader(@Value("#{jobParameters['fileName']}") String fileName) {
 
