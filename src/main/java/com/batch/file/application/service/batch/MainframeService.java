@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 public class MainframeService {
 
     private final CircuitBreakerRegistry circuitBreakerRegistry;
-    private final MainframePort mainFramePort;
+    private final MainframePort mainframePort;
     private final FailedRecordPort failedRecordPort;
 
     @Retry(name = "mainFrameRetry")
@@ -26,7 +26,7 @@ public class MainframeService {
             fallbackMethod = "fallback")
     public void send(Chunk<? extends Customer> customer)  {
         try {
-            mainFramePort.send(customer);
+            mainframePort.send(customer);
         } catch (Exception e) {
             throw new MainFrameException(e);
         }
