@@ -15,7 +15,7 @@ import javax.sql.DataSource;
  * This class is responsible for configuring the JdbcBatchItemWriter for writing Customer data to the MainFrame database.
  * It defines a bean that sets up the SQL insert statement and maps the Customer properties to the corresponding database columns.
  */
-public class MainFrameRepository {
+public class MainframeRepository {
     @Bean
     public JdbcBatchItemWriter<Customer> jdbcWriter(
             DataSource dataSource) {
