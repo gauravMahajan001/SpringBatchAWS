@@ -9,7 +9,7 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 @Slf4j
 @Component
-public class BatchProcessor implements ItemProcessor<Customer, Customer> {
+public class CsvRecordProcessor implements ItemProcessor<Customer, Customer> {
 
     @Override
     public @Nullable Customer process(Customer customer) throws Exception {

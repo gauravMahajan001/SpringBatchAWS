@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class MainframeAdapter implements MainframePort {
+public class MainframeRecordAdapter implements MainframePort {
   private final JdbcBatchItemWriter<Customer> jdbcBatchItemWriter;
   private final CustomerValidation customerValidation;
 

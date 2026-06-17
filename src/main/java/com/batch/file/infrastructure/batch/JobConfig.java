@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 @Slf4j
 @Configuration
 @RequiredArgsConstructor
-public class BatchJob {
+public class JobConfig {
 
     private final JobRepository jobRepository;
     private final Step stepConfig;

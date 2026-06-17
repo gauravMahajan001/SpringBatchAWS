@@ -17,7 +17,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/file")
 @RequiredArgsConstructor
-public class FileUploadController {
+public class CsvUploadController {
 
     private final S3Port s3Port;
     /**

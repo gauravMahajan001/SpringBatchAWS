@@ -12,10 +12,10 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class BatchProcessingService {
+public class CsvRecordService {
 
     private final DynamoDbPort dynamoDbPort;
-    private final MainframeService mainframeService;
+    private final MainframeRecordService mainframeService;
     private final FailedRecordPort failedRecordPort;
 
     public void process(Chunk<? extends Customer> chunk){

@@ -1,7 +1,7 @@
 package com.batch.file.application.service.batch;
 
 import com.batch.file.constant.ApplicationConstant;
-import com.batch.file.ports.in.batch.BatchPort;
+import com.batch.file.ports.in.batch.StartPort;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
@@ -19,8 +19,8 @@ import java.time.LocalDate;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class BatchStartService implements BatchPort {
-   //CustomerJob is the name of the job defined in the BatchJob class
+public class StartService implements StartPort {
+   //CustomerJob is the name of the job defined in the JobConfig class
     private final Job customerJob;
     private final JobLauncher jobLauncher;
 

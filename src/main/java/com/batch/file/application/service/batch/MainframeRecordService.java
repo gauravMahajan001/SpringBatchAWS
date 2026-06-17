@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class MainframeService {
+public class MainframeRecordService {
 
     private final CircuitBreakerRegistry circuitBreakerRegistry;
     private final MainframePort mainframePort;

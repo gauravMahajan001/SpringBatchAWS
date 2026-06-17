@@ -23,7 +23,7 @@ import java.util.Map;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class DynamoDbAdapter implements DynamoDbPort {
+public class DynamoDbRecordAdapter implements DynamoDbPort {
     private final DynamoDbClient dynamoDbClient;
     private final CustomerValidation customerValidation;
     @Value("${record.size}")

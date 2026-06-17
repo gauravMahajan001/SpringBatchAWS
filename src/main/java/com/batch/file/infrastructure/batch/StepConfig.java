@@ -1,6 +1,6 @@
 package com.batch.file.infrastructure.batch;
 
-import com.batch.file.adapters.in.batch.BatchWriter;
+import com.batch.file.adapters.in.batch.CsvRecordWriter;
 import com.batch.file.constant.ApplicationConstant;
 import com.batch.file.entity.batch.Customer;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +25,7 @@ import java.net.SocketTimeoutException;
  * It defines the chunk size and retry count for processing Customer entities.
  * The step reads Customer data, processes it, and writes it to the specified output.
  */
-public class BatchStep {
+public class StepConfig {
     @Value("${chunk.size}")
     private int chuckSize;
     @Value("${retry.count}")
@@ -37,7 +37,7 @@ public class BatchStep {
             PlatformTransactionManager transactionManager,
             ItemReader<Customer> reader,
             ItemProcessor<Customer, Customer> processor,
-            BatchWriter writer) {
+            CsvRecordWriter writer) {
 
         log.info("Initializing batch step with configuration - chunkSize: {}, retryCount: {}", chuckSize, retryCount);
         return new StepBuilder(

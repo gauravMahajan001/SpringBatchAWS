@@ -19,7 +19,7 @@ import org.springframework.core.io.FileSystemResource;
  */
 @Slf4j
 @Configuration
-public class BatchReader {
+public class CsvRecordReader {
     @Bean
     public FlatFileItemReader<Customer> customerReader(@Value("#{jobParameters['fileName']}") String fileName) {
 
