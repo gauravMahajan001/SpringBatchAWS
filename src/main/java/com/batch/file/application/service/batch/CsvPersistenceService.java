@@ -2,8 +2,6 @@ package com.batch.file.application.service.batch;
 
 import com.batch.file.constant.ApplicationConstant;
 import com.batch.file.entity.batch.Customer;
-import com.batch.file.ports.out.batch.DynamoDbPort;
-import com.batch.file.ports.out.batch.FailedRecordPort;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.item.Chunk;
@@ -12,22 +10,22 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class CsvRecordService {
+public class CsvPersistenceService {
 
-    private final DynamoDbPort dynamoDbPort;
-    private final MainframeRecordService mainframeService;
-    private final FailedRecordPort failedRecordPort;
+    private final CsvSaveService dynamoDbPersistenceService;
+    private final CsvMainframeService mainframeService;
+    private final CsvFailedService failedRecordService;
 
     public void process(Chunk<? extends Customer> chunk){
         //framework handles db down and use retry mechanism
         log.info("write on DynamoDb started");
-        dynamoDbPort.saveAll(chunk);
+        dynamoDbPersistenceService.saveAll(chunk, null);
         log.info("write on DynamoDb completed");
 
         //CIRCUIT OPEN
         if (mainframeService.isUnavailable()) {
             log.warn("MainFrame Db down");
-            failedRecordPort.saveAll(chunk, ApplicationConstant.MAINFRAME_DOWN);
+            failedRecordService.saveAll(chunk, ApplicationConstant.MAINFRAME_DOWN);
             return;
         }
 

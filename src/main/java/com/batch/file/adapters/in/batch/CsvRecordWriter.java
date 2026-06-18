@@ -1,6 +1,6 @@
 package com.batch.file.adapters.in.batch;
 
-import com.batch.file.application.service.batch.CsvRecordService;
+import com.batch.file.application.service.batch.CsvPersistenceService;
 import com.batch.file.entity.batch.Customer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,12 +13,12 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class CsvRecordWriter implements ItemWriter<Customer> {
 
-    private final CsvRecordService batchProcessingService;
+    private final CsvPersistenceService csvRecordService;
 
     @Override
     public void write(Chunk<? extends Customer> chunk) {
 
-        batchProcessingService.process(chunk);
+        csvRecordService.process(chunk);
     }
 }
 

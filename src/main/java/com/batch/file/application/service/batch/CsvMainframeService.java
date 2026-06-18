@@ -2,7 +2,6 @@ package com.batch.file.application.service.batch;
 
 import com.batch.file.entity.batch.Customer;
 import com.batch.file.exception.MainFrameException;
-import com.batch.file.ports.out.batch.FailedRecordPort;
 import com.batch.file.ports.out.batch.MainframePort;
 import io.github.resilience4j.circuitbreaker.CircuitBreaker;
 import io.github.resilience4j.circuitbreaker.CircuitBreakerRegistry;
@@ -15,11 +14,11 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class MainframeRecordService {
+public class CsvMainframeService {
 
     private final CircuitBreakerRegistry circuitBreakerRegistry;
     private final MainframePort mainframePort;
-    private final FailedRecordPort failedRecordPort;
+    private final CsvFailedService failedRecordService;
 
     @Retry(name = "mainFrameRetry")
     @io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker(name = "mainFrameCircuitBreaker",
@@ -34,13 +33,12 @@ public class MainframeRecordService {
 
     public void fallback(Chunk<? extends Customer> chunk, Exception ex) {
 
-        failedRecordPort.saveAll(chunk, ex.getMessage());
+        failedRecordService.saveAll(chunk, ex.getMessage());
     }
 
     public boolean isUnavailable() {
 
-        CircuitBreaker circuitBreaker =
-                circuitBreakerRegistry
+        CircuitBreaker circuitBreaker = circuitBreakerRegistry
                         .circuitBreaker(
                                 "mainFrameCircuitBreaker");
         return circuitBreaker.getState()

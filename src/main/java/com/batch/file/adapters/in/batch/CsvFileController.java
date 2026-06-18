@@ -19,12 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class CsvFileController {
 
-    private final StartPort batchPort;
+    private final StartPort startPort;
 
     @PostMapping("/startBatch")
     public String processFile(@RequestBody CsvRecordDto batchFileDto) throws JobInstanceAlreadyCompleteException,
             JobExecutionAlreadyRunningException, JobParametersInvalidException, JobRestartException {
 
-        return batchPort.start(batchFileDto.getBucketName(), batchFileDto.getFileName());
+        return startPort.start(batchFileDto.getBucketName(), batchFileDto.getFileName());
     }
 }

@@ -10,6 +10,11 @@ spring:
     password: password
     driver-class-name: com.ibm.db2.jcc.DB2Driver
 
+server:
+  port: 8080
+  servlet:
+    context-path: /batch
+
 chunk:
   size: 1000
 retry:
@@ -31,3 +36,7 @@ resilience4j:
 
 record:
   size: 500
+
+aws:
+  s3:
+    bucket-name: aws-india-mumbai-csv

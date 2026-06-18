@@ -19,7 +19,7 @@ import java.time.LocalDate;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class StartService implements StartPort {
+public class CsvStartService implements StartPort {
    //CustomerJob is the name of the job defined in the JobConfig class
     private final Job customerJob;
     private final JobLauncher jobLauncher;
