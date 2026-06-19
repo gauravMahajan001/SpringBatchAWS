@@ -34,6 +34,7 @@ public class CsvFailedService extends AbstractDynamoDbService {
     protected Map<String, AttributeValue> buildItem(Customer customer, String reason) {
         Map<String, AttributeValue> item = recordItem.buildItem(customer);
         FailedRecord failedRecord = new FailedRecord();
+        failedRecord.generateId();
         item.put("id", AttributeValue.builder().s(failedRecord.getId()).build());
         item.put("reason", AttributeValue.builder().s(reason).build());
         return item;

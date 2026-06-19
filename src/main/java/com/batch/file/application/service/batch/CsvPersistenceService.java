@@ -6,28 +6,22 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.item.Chunk;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 @Slf4j
-@Component
+@Service
 @RequiredArgsConstructor
 public class CsvPersistenceService {
 
-    private final CsvSaveService dynamoDbPersistenceService;
+    private final CsvSaveService csvSaveService;
     private final CsvMainframeService mainframeService;
-    private final CsvFailedService failedRecordService;
+    //private final CsvFailedService failedRecordService;
 
     public void process(Chunk<? extends Customer> chunk){
         //framework handles db down and use retry mechanism
         log.info("write on DynamoDb started");
-        dynamoDbPersistenceService.saveAll(chunk, null);
+        csvSaveService.saveAll(chunk, null);
         log.info("write on DynamoDb completed");
-
-        //CIRCUIT OPEN
-        if (mainframeService.isUnavailable()) {
-            log.warn("MainFrame Db down");
-            failedRecordService.saveAll(chunk, ApplicationConstant.MAINFRAME_DOWN);
-            return;
-        }
 
         //NORMAL FLOW. if there is any exception then  retry and circuit breaker  mechanism
         log.info("write on mainframe started");

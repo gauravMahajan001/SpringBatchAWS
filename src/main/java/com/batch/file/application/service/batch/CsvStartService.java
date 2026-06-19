@@ -13,11 +13,12 @@ import org.springframework.batch.core.repository.JobExecutionAlreadyRunningExcep
 import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
 import org.springframework.batch.core.repository.JobRestartException;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 
 @Slf4j
-@Component
+@Service
 @RequiredArgsConstructor
 public class CsvStartService implements StartPort {
    //CustomerJob is the name of the job defined in the JobConfig class

@@ -19,21 +19,16 @@ server:
     context-path: /batch
 
 chunk:
-  size: 1000
+  size: 25
 retry:
   count: 3
 
 resilience4j:
-  retry:
-    instances:
-      mainframeRetry:
-        max-attempts: 3
-        wait-duration: 2s
-
   circuitbreaker:
     instances:
       mainframeCircuitBreaker:
         sliding-window-size: 5
+        minimum-number-of-calls: 5
         failure-rate-threshold: 50
         wait-duration-in-open-state: 30s
 

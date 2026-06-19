@@ -3,6 +3,7 @@ package com.batch.file.infrastructure.batch;
 import com.batch.file.adapters.in.batch.CsvRecordWriter;
 import com.batch.file.constant.ApplicationConstant;
 import com.batch.file.entity.batch.Customer;
+import com.batch.file.exception.DynamoPersistenceException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.repository.JobRepository;
@@ -48,6 +49,7 @@ public class StepConfig {
                 .writer(writer)
                 .faultTolerant()
                 .retry(ProvisionedThroughputExceededException.class)
+                .retry(DynamoPersistenceException.class)
                 .retry(SocketTimeoutException.class)
                 .retry(ConnectException.class)
                 .retryLimit(retryCount)
