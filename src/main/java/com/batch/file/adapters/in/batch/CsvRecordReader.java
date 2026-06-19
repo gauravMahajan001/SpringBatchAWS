@@ -2,6 +2,7 @@ package com.batch.file.adapters.in.batch;
 
 import com.batch.file.entity.batch.Customer;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.LineMapper;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
@@ -19,8 +20,10 @@ import org.springframework.core.io.FileSystemResource;
  */
 @Slf4j
 @Configuration
+
 public class CsvRecordReader {
     @Bean
+    @StepScope
     public FlatFileItemReader<Customer> customerReader(@Value("#{jobParameters['fileName']}") String fileName) {
 
         log.info("Initializing FlatFileItemReader for file: {}", fileName);

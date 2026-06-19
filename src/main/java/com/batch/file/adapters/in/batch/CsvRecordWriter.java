@@ -13,12 +13,12 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class CsvRecordWriter implements ItemWriter<Customer> {
 
-    private final CsvPersistenceService csvRecordService;
+    private final CsvPersistenceService persistenceService;
 
     @Override
     public void write(Chunk<? extends Customer> chunk) {
 
-        csvRecordService.process(chunk);
+        persistenceService.process(chunk);
     }
 }
 

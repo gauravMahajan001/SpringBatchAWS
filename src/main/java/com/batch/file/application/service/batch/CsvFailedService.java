@@ -20,7 +20,7 @@ public class CsvFailedService extends AbstractDynamoDbService {
             DynamoDbPersistencePort dynamoDbPersistencePort,
             RecordItem recordItem,
             @Value("${record.size}") int recordSize,
-            @Value("${failed.table.name}") String tableName) {
+            @Value("${aws.dynamodb.failed-table-name}") String tableName) {
 
         super(
                 dynamoDbPersistencePort,

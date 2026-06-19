@@ -22,7 +22,7 @@ public class CsvSaveService extends AbstractDynamoDbService {
             DynamoDbPersistencePort dynamoDbPersistencePort,
             RecordItem recordItem,
             @Value("${record.size}") int recordSize,
-            @Value("${failed.table.name}") String tableName, CustomerValidation customerValidation) {
+            @Value("${aws.dynamodb.customer-table-name}") String tableName, CustomerValidation customerValidation) {
 
         super(
                 dynamoDbPersistencePort,

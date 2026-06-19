@@ -1,13 +1,12 @@
 package com.batch.file.adapters.in.storage;
 
+import com.batch.file.dto.storage.CsvUploadRequestDto;
+import com.batch.file.dto.storage.CsvUploadResponseDto;
 import com.batch.file.ports.out.storage.S3Port;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.Duration;
 import java.util.HashMap;
@@ -24,19 +23,18 @@ public class CsvUploadController {
      * Generate a presigned URL for uploading a file to S3
      */
     @PostMapping("/upload-url")
-    public ResponseEntity<Map<String, String>> generateUploadUrl(@RequestParam String fileName) {
+    public ResponseEntity<CsvUploadResponseDto> generateUploadUrl(@RequestBody CsvUploadRequestDto requestDto) {
         try {
-            log.info("Generating presigned upload URL for fileName: {}", fileName);
-            String presignedUrl = s3Port.presignUploadUrl(fileName, Duration.ofMinutes(15));
+            log.info("Generating presigned upload URL for fileName: {}", requestDto.getFileName());
+            String presignedUrl = s3Port.presignUploadUrl(requestDto.getFileName(), Duration.ofMinutes(15));
+            CsvUploadResponseDto responseDto = new CsvUploadResponseDto();
+            responseDto.setFileName(requestDto.getFileName());
+            responseDto.setUploadUrl(presignedUrl);
 
-            Map<String, String> response = new HashMap<>();
-            response.put("uploadUrl", presignedUrl);
-            response.put("fileName", fileName);
-
-            log.debug("Successfully generated presigned upload URL for fileName: {}", fileName);
-            return ResponseEntity.ok(response);
+            log.debug("Successfully generated presigned upload URL for fileName: {}", requestDto.getFileName());
+            return ResponseEntity.ok(responseDto);
         } catch (Exception e) {
-            log.error("Error generating presigned upload URL for fileName: {}", fileName, e);
+            log.error("Error generating presigned upload URL for fileName: {}", requestDto.getFileName(), e);
             return ResponseEntity.badRequest().build();
         }
     }

@@ -42,23 +42,5 @@ public class S3PresignerAdapter implements S3Port {
         log.info("Successfully generated presign upload URL for fileName: {} in bucket: {}", fileName, bucketName);
         return presignedRequest.url().toString();
     }
-
-    @Override
-    public String presignDownloadUrl(String fileName, Duration duration) {
-        log.debug("Generating presign download URL for fileName: {}, bucket: {}, duration: {}", fileName, bucketName, duration);
-        GetObjectRequest getObjectRequest = GetObjectRequest.builder()
-                .bucket(bucketName)
-                .key(fileName)
-                .build();
-
-        GetObjectPresignRequest presignRequest = GetObjectPresignRequest.builder()
-                .signatureDuration(duration)
-                .getObjectRequest(getObjectRequest)
-                .build();
-
-        PresignedGetObjectRequest presignedRequest = s3Presigner.presignGetObject(presignRequest);
-        log.info("Successfully generated presign download URL for fileName: {} in bucket: {}", fileName, bucketName);
-        return presignedRequest.url().toString();
-    }
 }
 
