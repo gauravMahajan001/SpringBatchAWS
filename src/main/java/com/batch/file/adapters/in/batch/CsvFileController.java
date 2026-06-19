@@ -3,6 +3,7 @@ package com.batch.file.adapters.in.batch;
 import com.batch.file.application.service.batch.CsvAuditService;
 import com.batch.file.dto.batch.CsvFileDto;
 import com.batch.file.ports.in.batch.StartPort;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.JobParametersInvalidException;
@@ -24,7 +25,7 @@ public class CsvFileController {
     private final CsvAuditService csvAuditService;
 
     @PostMapping("/startBatch")
-    public String processFile(@RequestBody CsvFileDto csvFileDto) throws JobInstanceAlreadyCompleteException,
+    public String processFile(@Valid @RequestBody CsvFileDto csvFileDto) throws JobInstanceAlreadyCompleteException,
             JobExecutionAlreadyRunningException, JobParametersInvalidException, JobRestartException {
 
         csvAuditService.audit(csvFileDto.getBucketName(), csvFileDto.getFileName());

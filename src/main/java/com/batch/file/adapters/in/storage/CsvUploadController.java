@@ -3,6 +3,7 @@ package com.batch.file.adapters.in.storage;
 import com.batch.file.dto.storage.CsvUploadRequestDto;
 import com.batch.file.dto.storage.CsvUploadResponseDto;
 import com.batch.file.ports.out.storage.S3Port;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,7 @@ public class CsvUploadController {
      * Generate a presigned URL for uploading a file to S3
      */
     @PostMapping("/upload-url")
-    public ResponseEntity<CsvUploadResponseDto> generateUploadUrl(@RequestBody CsvUploadRequestDto requestDto) {
+    public ResponseEntity<CsvUploadResponseDto> generateUploadUrl(@Valid @RequestBody CsvUploadRequestDto requestDto) {
         try {
             log.info("Generating presigned upload URL for fileName: {}", requestDto.getFileName());
             String presignedUrl = s3Port.presignUploadUrl(requestDto.getFileName(), Duration.ofMinutes(15));
