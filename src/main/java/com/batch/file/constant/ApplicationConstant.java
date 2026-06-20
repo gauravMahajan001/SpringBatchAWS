@@ -11,6 +11,7 @@ public interface ApplicationConstant {
     String TABLE_NAME_FAILED_RECORD =" FAILED_RECORDS";
     String RUN_ID= "runId";
     String FILE_NAME= "fileName";
+    String BUCKET_NAME= "bucketName";
     String PROCESS_DATE = "processDate";
     String MAINFRAME_DOWN= "MainFrame Down";
 }

@@ -13,16 +13,16 @@ import org.springframework.context.annotation.Configuration;
 @Slf4j
 @Configuration
 @RequiredArgsConstructor
-public class JobConfig {
-
+public class BatchJobConfig {
+    // Currently h2 data is used but need to use mysql or postgres
     private final JobRepository jobRepository;
-    private final Step stepConfig;
+    private final Step  batchStep;
 
     @Bean
     public Job batchJob() {
         log.info("Initializing batch job: {}", ApplicationConstant.CUSTOMER_JOB);
         return new JobBuilder(ApplicationConstant.CUSTOMER_JOB, jobRepository)
-                .start(stepConfig)
+                .start(batchStep)
                 .build();
     }
 }

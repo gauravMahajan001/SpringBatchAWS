@@ -13,7 +13,7 @@ import software.amazon.awssdk.services.s3.presigner.S3Presigner;
 @RequiredArgsConstructor
 public class AwsConfig {
 
-    @Value("${aws.region:ap-south-1}")
+    @Value("${aws.region.name}")
     private String awsRegion;
 
     @Bean

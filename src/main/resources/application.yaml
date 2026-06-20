@@ -42,3 +42,9 @@ aws:
     audit-table-name: audit-records
     customer-table-name: customer-records
     failed-table-name: failed-records
+    max-connection: 100
+
+  region:
+    name: ap-south-1
+
+

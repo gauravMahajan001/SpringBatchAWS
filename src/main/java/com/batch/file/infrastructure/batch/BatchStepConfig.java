@@ -26,7 +26,7 @@ import java.net.SocketTimeoutException;
  * It defines the chunk size and retry count for processing Customer entities.
  * The step reads Customer data, processes it, and writes it to the specified output.
  */
-public class StepConfig {
+public class BatchStepConfig {
     @Value("${chunk.size}")
     private int chuckSize;
     @Value("${retry.count}")

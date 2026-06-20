@@ -22,19 +22,18 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 public class CsvStartService implements StartPort {
    //CustomerJob is the name of the job defined in the JobConfig class
-    private final Job customerJob;
+    private final Job batchJob;
     private final JobLauncher jobLauncher;
 
     @Override
     public String start(String bucketName, String fileName) throws JobInstanceAlreadyCompleteException, JobExecutionAlreadyRunningException, JobParametersInvalidException, JobRestartException {
 
         JobParameters parameters = new JobParametersBuilder()
-                .addLong(ApplicationConstant.RUN_ID, System.currentTimeMillis())
+                .addString(ApplicationConstant.BUCKET_NAME, fileName)
                 .addString(ApplicationConstant.FILE_NAME, fileName)
-                .addString(ApplicationConstant.PROCESS_DATE,  LocalDate.now().toString())
                 .toJobParameters();
         log.info("batch started");
-        jobLauncher.run(customerJob, parameters);
+        jobLauncher.run(batchJob, parameters);
         return ApplicationConstant.JOB_START;
     }
 }

@@ -14,10 +14,13 @@ import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 
 @Slf4j
 @Configuration
-
 public class DynamoDbConfig {
     @Value("${aws.dynamodb.audit-table-name}")
     private String auditTableName;
+    @Value("${aws.region.name}")
+    private String awsRegion;
+    @Value("${aws.dynamodb.max-connection}")
+    private int maxConnections;
 
     @Bean
     public DynamoDbTable<AuditRecord> auditRecordTable(
@@ -43,9 +46,9 @@ public class DynamoDbConfig {
         return DynamoDbClient.builder()
                 .httpClientBuilder(
                         ApacheHttpClient.builder()
-                                .maxConnections(100)
+                                .maxConnections(maxConnections)
                 )
-                .region(Region.AP_SOUTH_1)
+                .region(Region.of(awsRegion))
                 .build();
     }
 }
