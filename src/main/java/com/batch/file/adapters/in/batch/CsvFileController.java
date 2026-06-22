@@ -2,7 +2,7 @@ package com.batch.file.adapters.in.batch;
 
 import com.batch.file.application.service.batch.CsvAuditService;
 import com.batch.file.dto.batch.CsvFileDto;
-import com.batch.file.ports.in.batch.StartPort;
+import com.batch.file.ports.in.batch.BatchStartPort;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,13 +21,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class CsvFileController {
 
-    private final StartPort startPort;
+    private final BatchStartPort startPort;
     private final CsvAuditService csvAuditService;
 
     @PostMapping("/startBatch")
     public String processFile(@Valid @RequestBody CsvFileDto csvFileDto) throws JobInstanceAlreadyCompleteException,
             JobExecutionAlreadyRunningException, JobParametersInvalidException, JobRestartException {
-
+//AuditRecord existing =
+//        auditRepository.findByFileName(fileName);
         csvAuditService.audit(csvFileDto.getBucketName(), csvFileDto.getFileName());
         return startPort.start(csvFileDto.getBucketName(), csvFileDto.getFileName());
     }

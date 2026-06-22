@@ -24,16 +24,17 @@ import org.springframework.core.io.FileSystemResource;
 public class CsvRecordReader {
     @Bean
     @StepScope
-    public FlatFileItemReader<Customer> customerReader(@Value("#{jobParameters['fileName']}") String fileName) {
+    public FlatFileItemReader<Customer> customerReader(
+                @Value("#{jobParameters['localFile']}") String localFile) {
 
-        log.info("Initializing FlatFileItemReader for file: {}", fileName);
+        log.info("Initializing FlatFileItemReader for file: {}", localFile);
         FlatFileItemReader<Customer> reader = new FlatFileItemReader<>();
-        reader.setResource(new FileSystemResource(fileName));
+        reader.setResource(new FileSystemResource(localFile));
         reader.setLinesToSkip(1);
         reader.setName("customerReader");
         reader.setLineMapper(lineMapper());
 
-        log.debug("FlatFileItemReader configured for file: {}", fileName);
+        log.debug("FlatFileItemReader configured for file: {}", localFile);
         return reader;
     }
 
