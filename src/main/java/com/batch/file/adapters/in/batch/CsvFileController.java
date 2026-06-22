@@ -22,14 +22,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class CsvFileController {
 
     private final BatchStartPort startPort;
-    private final CsvAuditService csvAuditService;
 
     @PostMapping("/startBatch")
     public String processFile(@Valid @RequestBody CsvFileDto csvFileDto) throws JobInstanceAlreadyCompleteException,
             JobExecutionAlreadyRunningException, JobParametersInvalidException, JobRestartException {
-//AuditRecord existing =
-//        auditRepository.findByFileName(fileName);
-        csvAuditService.audit(csvFileDto.getBucketName(), csvFileDto.getFileName());
+
         return startPort.start(csvFileDto.getBucketName(), csvFileDto.getFileName());
     }
 }

@@ -32,7 +32,7 @@ public class AwsConfig {
     public S3Client awsS3Client() {
         log.info("Initializing S3Client bean with region: {}", awsRegion);
         return S3Client.builder()
-                .region(Region.AP_SOUTH_1)
+                .region(Region.of(awsRegion))
                 .httpClientBuilder(
                         ApacheHttpClient.builder()
                                 .maxConnections(100)

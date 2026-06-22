@@ -1,5 +1,6 @@
 package com.batch.file.application.service.batch;
 
+import com.batch.file.constant.ApplicationConstant;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -18,27 +19,23 @@ public class S3DownloadService {
 
     public Path downloadToTempFile(String bucketName, String fileName) {
         try {
-            Path tempFile = Files.createTempFile(fileName, ".csv");
-            GetObjectRequest request = GetObjectRequest.builder()
-                    .bucket(bucketName)
-                    .key(fileName)
-                    .build();
+            Path tempDir = Path.of(ApplicationConstant.TEMP_PATH);
+            Files.createDirectories(tempDir);
+            Path tempFile = tempDir.resolve(fileName);
+            if (!Files.exists(tempFile)) {
 
-            s3Client.getObject(request, tempFile);
-            log.info(
-                    "Downloaded file from S3. bucket={}, key={}, localFile={}",
-                    bucketName,
-                    fileName,
-                    tempFile);
+                log.info("Downloaded file from S3. bucket={}, key={}, localFile={}",
+                        bucketName, fileName, tempFile);
+                GetObjectRequest request = GetObjectRequest.builder().bucket(bucketName).key(fileName).build();
+
+                s3Client.getObject(request, tempFile);
+            } else {
+
+                log.info("Using existing local file {}", tempFile);
+            }
             return tempFile;
         } catch (IOException e) {
-            throw new RuntimeException(
-                    String.format(
-                            "Failed to download file from S3. bucket=%s, key=%s",
-                            bucketName,
-                            fileName),
-                    e);
-
+            throw new RuntimeException(String.format("Failed to download file from S3. bucket=%s, key=%s", bucketName, fileName), e);
         }
     }
 }

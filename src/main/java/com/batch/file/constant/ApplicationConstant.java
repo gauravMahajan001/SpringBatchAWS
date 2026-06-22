@@ -12,4 +12,5 @@ public interface ApplicationConstant {
     String PROCESS_DATE = "processDate";
     String MAINFRAME_DOWN= "MainFrame Down";
     String LOCAL_FILE = "localFile";
+    String TEMP_PATH= "/tmp/batch-files";
 }

@@ -12,13 +12,16 @@ import java.time.LocalDate;
 public class CsvAuditService {
     private final PersistenceAuditRecordPort saveAuditRecordPort;
 
-    public void audit(String bucketName, String fileName) {
+    public void audit(String bucketName, String fileName, String status) {
 
         AuditRecord auditRecord = new AuditRecord();
-        auditRecord.generateId();
         auditRecord.setBucketName(bucketName);
         auditRecord.setFileName(fileName);
-        auditRecord.setCreatedDate(LocalDate.now());
+        auditRecord.setStatus(status);
+        LocalDate today = LocalDate.now();
+
+        auditRecord.setCreatedDate(today);
+        auditRecord.setUpdatedDate(today);
 
         saveAuditRecordPort.save(auditRecord);
     }

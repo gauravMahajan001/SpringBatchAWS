@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import software.amazon.awssdk.core.exception.SdkClientException;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbTable;
+import software.amazon.awssdk.enhanced.dynamodb.Key;
 import software.amazon.awssdk.services.dynamodb.model.DynamoDbException;
 
 @Slf4j
@@ -25,15 +26,24 @@ public class DynamoDbAuditAdapter implements PersistenceAuditRecordPort {
             auditRecordTable.putItem(auditRecord);
         } catch (SdkClientException ex) {
 
-            log.error("Unable to connect to DynamoDB while saving audit record. id={}", auditRecord.getId(), ex);
+            log.error("Unable to connect to DynamoDB while saving audit record. id={}", auditRecord.getFileName(), ex);
             throw new AuditPersistenceException("Unable to connect to DynamoDB", ex);
 
         } catch (DynamoDbException ex) {
 
-            log.error("DynamoDB error while saving audit record. id={}", auditRecord.getId(), ex);
+            log.error("DynamoDB error while saving audit record. id={}", auditRecord.getFileName(), ex);
             throw new AuditPersistenceException("Failed to save audit record", ex);
         }
 
 
+    }
+
+    @Override
+    public AuditRecord findByFileName(String fileName) {
+        return auditRecordTable.getItem(
+                Key.builder()
+                        .partitionValue(fileName)
+                        .build()
+        );
     }
 }

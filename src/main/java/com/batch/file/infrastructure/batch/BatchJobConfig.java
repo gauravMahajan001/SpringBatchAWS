@@ -23,6 +23,7 @@ public class BatchJobConfig {
         log.info("Initializing batch job: {}", ApplicationConstant.CUSTOMER_JOB);
         return new JobBuilder(ApplicationConstant.CUSTOMER_JOB, jobRepository)
                 .start(batchStep)
+                .listener(batchJobListener)
                 .build();
     }
 }
