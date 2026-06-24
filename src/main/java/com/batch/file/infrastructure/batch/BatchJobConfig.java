@@ -17,6 +17,7 @@ public class BatchJobConfig {
     // Currently h2 data is used but need to use mysql or postgres
     private final JobRepository jobRepository;
     private final Step  batchStep;
+    private final BatchJobListener  batchJobListener;
 
     @Bean
     public Job batchJob() {
