@@ -1,0 +1,8 @@
+package com.batch.file.ports.out.batch;
+
+import com.batch.file.entity.batch.Customer;
+import org.springframework.batch.item.Chunk;
+
+public interface MainframePort {
+    void send(Chunk<? extends Customer> chunk) throws Exception;
+}

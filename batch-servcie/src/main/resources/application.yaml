@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: SpringbatchFile
+  batch:
+    job:
+      enabled: false
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+
+server:
+  port: 8080
+  servlet:
+    context-path: /batch
+
+chunk:
+  size: 25
+retry:
+  count: 3
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      mainframeCircuitBreaker:
+        sliding-window-size: 5
+        minimum-number-of-calls: 5
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 30s
+
+record:
+  size: 500
+
+aws:
+  s3:
+    bucket-name: aws-india-mumbai-csv
+  dynamodb:
+    audit-table-name: audit-records
+    customer-table-name: customer-records
+    failed-table-name: failed-records
+    max-connection: 100
+
+  region:
+    name: ap-south-1
+
+
